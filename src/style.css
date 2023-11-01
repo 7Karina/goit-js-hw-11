@@ -23,8 +23,8 @@ button {
   border-width: 7px;
   border-radius: 15px;
   border-style: double;
-  border-color: rgb(104, 104, 104);
-  box-shadow: 0px 0px 10px 0px rgba(40, 39, 40, 0.76);
+  border-color: #fc8a11;
+  box-shadow: 0px 4px 70px rgba(0, 0, 0, 0.1);
 }
 
 .load-more {
@@ -39,7 +39,7 @@ input {
   border-style: double;
   border-color: rgb(104, 104, 104);
   box-shadow: 0px 0px 10px 0px rgba(40, 39, 40, 0.76);
-  text-shadow: 0px 0px 8px rgba(42, 42, 42, 0.75);
+  text-shadow: 0px 4px 70px rgba(0, 0, 0, 0.1);
   font-style: none;
   font-family: monospace;
   font-weight: normal;
@@ -54,12 +54,12 @@ input:focus {
   padding: 20px 0;
   margin-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 11px 16px 0px rgba(0, 0, 0, 0.65);
+  box-shadow: 0px 4px 70px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 11px 16px 0px rgba(0, 0, 0, 0.65);
   -moz-box-shadow: 0px 11px 16px 0px rgba(0, 0, 0, 0.65);
   display: flex;
   justify-content: center;
-  background-color: rgb(237, 197, 252);
+  background-color: #a1c487;
 }
 
 .gallery {
