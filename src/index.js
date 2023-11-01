@@ -3,13 +3,13 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { getSearch } from './search-api';
 
-const formEl = document.querySelector('.search-form');
+const formEl = document.querySelector('#search-form');
 const btnLoadEl = document.querySelector('.load-more');
 const galleryEl = document.querySelector('.gallery');
 
 let resultPage = 1;
 let formValue = '';
-let createDom = '';
+let createNewDomEl = '';
 let arrDataLength = 0;
 let totalHits = 0;
 
@@ -33,7 +33,7 @@ async function onSearc(evt) {
         );
       }
       Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-      createDom(arrData);
+      createDomEl(arrData);
       if (arrDataLength >= totalHits) {
         btnLoadEl.classList.add('is-hidden');
         Notiflix.Notify.info(
@@ -47,6 +47,18 @@ async function onSearc(evt) {
     .finally();
 }
 
+formEl.addEventListener('submit', onSearc);
+btnLoadEl.addEventListener('click', onLoader);
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  sourceAttr: 'href',
+  overlayOpacity: 0.4,
+  animationSpeed: 500,
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
+
 function picture(arrData) {
   return arrData
     .map(
@@ -59,22 +71,45 @@ function picture(arrData) {
         comments,
         downloads,
       }) => `<div class="photo-card">
-  <img src="" alt="" loading="lazy" />
+      <a class = "galery__link" href = "${largeImageURL}"><img class = "gallery__img" src="${webformatURL}" alt="${tags}" loading="lazy" /></a>
   <div class="info">
     <p class="info-item">
-      <b>Likes</b>
+      <b>Likes:${likes}</b>
     </p>
     <p class="info-item">
-      <b>Views</b>
+      <b>Views:${views}</b>
     </p>
     <p class="info-item">
-      <b>Comments</b>
+      <b>Comments:${comments}</b>
     </p>
     <p class="info-item">
-      <b>Downloads</b>
+      <b>Downloads:${downloads}</b>
     </p>
   </div>
 </div>`
     )
     .join('');
+}
+
+function createDomEl(arrData) {
+  createNewDomEl = picture(arrData);
+  galleryEl.innerHTML = picture(arrData);
+  lightbox.refresh();
+}
+
+async function onLoader() {
+  resultPage += 1;
+  await getSearch(formValue, resultPage).then(data => {
+    const arrData = data.data.hits;
+    arrDataLength += arrData.length;
+    createDomEl += picture(arrData);
+    galleryEl.innerHTML = createDomEl;
+    lightbox.refresh();
+    if (arrDataLength >= totalHits) {
+      btnLoadEl.classList.add('is-hidden');
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results."
+      );
+    }
+  });
 }
