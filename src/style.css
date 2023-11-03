@@ -38,9 +38,9 @@ input {
   border-width: 7px;
   border-radius: 15px;
   border-style: double;
-  border-color: rgb(104, 104, 104);
-  box-shadow: 0px 0px 10px 0px rgba(40, 39, 40, 0.76);
-  text-shadow: 0px 4px 70px rgba(0, 0, 0, 0.1);
+  border-color: rgba(177, 206, 131, 0.781);
+  box-shadow: 0px 0px 10px 0px rgba(112, 90, 112, 0.76);
+  text-shadow: 0px 4px 70px rgba(49, 48, 48, 0.1);
   font-style: none;
   font-family: monospace;
   font-weight: normal;
@@ -55,7 +55,7 @@ input:focus {
   padding: 20px 0;
   margin-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 11px 16px 0px rgba(0, 0, 0, 0.65);
+  box-shadow: 0px 11px 16px 0px rgba(192, 166, 166, 0.65);
   -webkit-box-shadow: 0px 11px 16px 0px rgba(0, 0, 0, 0.65);
   -moz-box-shadow: 0px 11px 16px 0px rgba(0, 0, 0, 0.65);
   display: flex;
@@ -65,11 +65,9 @@ input:focus {
 
 .gallery {
   display: grid;
-  max-width: 900px;
-  /* grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); */
   grid-template-columns: 1fr 1fr;
   column-gap: 0.5em;
-  grid-auto-rows: 400px;
+  grid-auto-rows: 500px;
   grid-gap: 15px;
   justify-content: center;
   padding: 0;
@@ -79,7 +77,8 @@ input:focus {
 }
 
 .photo-card {
-  height: 200px;
+  max-width: 100%;
+  height: auto;
   position: relative;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
@@ -90,7 +89,8 @@ input:focus {
   transform: scale(1.03);
 }
 
-.gallery__image {
+.gallery__img {
+  display: block;
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -99,9 +99,23 @@ input:focus {
 .gallery__link {
   display: block;
   text-decoration: none;
-  height: 100%;
 }
 
 .gallery__link:hover {
   cursor: zoom-in;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.info-item {
+  padding: 10px; /* Додайте відступи */
+  background: rgba(255, 255, 255, 0.8); /* Фон для підпису */
+  position: absolute;
+  bottom: 0; /* Внизу від зображення */
+  left: 0;
+  width: 100%;
 }
